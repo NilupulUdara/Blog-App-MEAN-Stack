@@ -1,0 +1,34 @@
+<h2 class="text-2xl font-bold mb-4">Register</h2>
+
+<form (ngSubmit)="register()" class="max-w-sm mx-auto p-6 bg-white shadow-md rounded-md">
+  <input
+    [(ngModel)]="user.username"
+    name="username"
+    placeholder="Username"
+    class="w-full mb-4 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  />
+
+  <input
+    [(ngModel)]="user.password"
+    name="password"
+    type="password"
+    placeholder="Password"
+    class="w-full mb-6 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  />
+
+  <button
+    type="submit"
+    class="w-full bg-indigo-600 text-white font-semibold py-2 rounded hover:bg-indigo-700 transition"
+  >
+    Register
+  </button>
+
+  <p class="mt-4 text-center text-gray-600">
+    Already have an account?
+    <a
+      routerLink="/login"
+      class="text-indigo-600 hover:underline ml-1"
+      >Login here</a
+    >
+  </p>
+</form>

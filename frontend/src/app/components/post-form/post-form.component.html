@@ -1,0 +1,32 @@
+<h2 class="text-2xl font-bold mb-4">Create Post</h2>
+
+<form (ngSubmit)="submit()" class="max-w-lg mx-auto p-4 bg-white shadow-md rounded-md">
+  <input
+    [(ngModel)]="post.title"
+    name="title"
+    placeholder="Title"
+    class="w-full mb-4 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+  
+  <textarea
+    [(ngModel)]="post.content"
+    name="content"
+    placeholder="Content"
+    rows="5"
+    class="w-full mb-4 px-3 py-2 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+  ></textarea>
+  
+  <input
+    [(ngModel)]="post.author"
+    name="author"
+    placeholder="Author"
+    class="w-full mb-6 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+  
+  <button
+    type="submit"
+    class="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 transition"
+  >
+    Post
+  </button>
+</form>

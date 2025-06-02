@@ -1,0 +1,24 @@
+<h2 class="text-2xl font-bold mb-6">All Posts</h2>
+
+<button
+  routerLink="/create"
+  class="mb-6 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
+>
+  Create Post
+</button>
+
+<ul class="space-y-6">
+  <li
+    *ngFor="let post of posts"
+    class="p-4 border border-gray-300 rounded shadow-sm bg-white"
+  >
+    <h3 class="text-xl font-semibold mb-2">{{ post.title }}</h3>
+    <p class="mb-4 text-gray-700 whitespace-pre-line">{{ post.content }}</p>
+    <button
+      (click)="delete(post._id)"
+      class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+    >
+      Delete
+    </button>
+  </li>
+</ul>
