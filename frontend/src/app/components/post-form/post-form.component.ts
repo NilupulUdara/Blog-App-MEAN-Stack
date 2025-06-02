@@ -11,9 +11,9 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule]
 })
 export class PostFormComponent {
-  post = { title: '', content: '', author: '' };
-  constructor(private postService: PostService, private router: Router) {}
+  post = { title: '', content: ''};
+  constructor(private postService: PostService, private router: Router) { }
   submit() {
-    this.postService.createPost(this.post).subscribe(() => this.router.navigate(['/']));
+    this.postService.createPost(this.post).subscribe(() => this.router.navigate(['/post-list']));
   }
 }

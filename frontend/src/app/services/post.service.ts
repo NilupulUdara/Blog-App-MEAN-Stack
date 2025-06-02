@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 @Injectable({ providedIn: 'root' })
 export class PostService {
   private baseUrl = 'http://localhost:3000/api/posts';
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
   private getHeaders() {
     return {
@@ -28,4 +28,9 @@ export class PostService {
   deletePost(id: string) {
     return this.http.delete(`${this.baseUrl}/${id}`, this.getHeaders());
   }
+
+  addComment(postId: string, text: string) {
+    return this.http.post(`${this.baseUrl}/${postId}/comments`, { text }, this.getHeaders());
+  }
+
 }
