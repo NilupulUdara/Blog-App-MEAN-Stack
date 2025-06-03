@@ -18,8 +18,24 @@ exports.updatePost = async (req, res) => {
 };
 
 exports.deletePost = async (req, res) => {
-  await Post.findByIdAndDelete(req.params.id);
-  res.json({ message: 'Post deleted' });
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    if (post.userId.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'You are not allowed to delete this post' });
+    }
+
+    await post.deleteOne();
+    res.json({ message: 'Post deleted successfully' });
+
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 };
 
 exports.addComment = async (req, res) => {
@@ -32,7 +48,7 @@ exports.addComment = async (req, res) => {
 
     const comment = {
       userId: req.user.id,
-      username: req.user.username, // include in JWT or fetch from DB
+      username: req.user.username,
       text,
     };
 
@@ -50,6 +66,27 @@ exports.getPostById = async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ message: 'Post not found' });
     res.json(post);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+    if (!post) return res.status(404).json({ message: 'Post not found' });
+
+    const commentId = req.params.commentId;
+    const comment = post.comments.id(commentId);
+
+    if (comment.userId.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Unauthorized to delete this comment' });
+    }
+
+    comment.remove();
+    await post.save();
+
+    res.status(200).json({ message: 'Comment deleted successfully' });
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }

@@ -36,4 +36,5 @@ export class PostDetailComponent implements OnInit {
       this.newComment = '';
     });
   }
+  
 }

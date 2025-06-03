@@ -1,18 +1,29 @@
-<div *ngIf="post" class="container mx-auto p-4">
-  <h2 class="text-2xl font-bold mb-4">{{ post.title }}</h2>
-  <p class="mb-4">{{ post.content }}</p>
+<div *ngIf="post" class="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-lg space-y-6">
 
-  <hr class="my-4" />
-  <h3 class="text-xl font-semibold mb-2">Comments</h3>
+  <div>
+    <h2 class="text-3xl font-bold text-gray-800 mb-2">{{ post.title }}</h2>
+    <p class="text-gray-700 whitespace-pre-line">{{ post.content }}</p>
+  </div>
 
-  <form (submit)="addComment()" class="mb-4">
-    <textarea [(ngModel)]="newComment" name="comment" required class="w-full border p-2" placeholder="Write a comment..."></textarea>
-    <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Post Comment</button>
-  </form>
+  <hr class="border-gray-300" />
 
-  <ul>
-    <li *ngFor="let comment of post.comments" class="bg-gray-100 p-2 rounded mb-2">
-      <strong>{{ comment.username }}:</strong> {{ comment.text }}
-    </li>
-  </ul>
+  <div>
+    <h3 class="text-2xl font-semibold text-gray-800 mb-4">💬 Comments</h3>
+
+    <form (submit)="addComment()" class="space-y-3">
+      <textarea [(ngModel)]="newComment" name="comment" required rows="3" placeholder="Write your comment here..."
+        class="w-full p-3 border border-gray-300 rounded-md resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+      <button type="submit"
+        class="inline-block px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+        Post Comment
+      </button>
+    </form>
+
+    <ul class="space-y-3 pt-4">
+      <li *ngFor="let comment of post.comments" class="bg-gray-50 p-3 border border-gray-200 rounded-md">
+        <span class="font-semibold text-gray-800">{{ comment.username }}</span>
+        <p class="text-gray-700 mt-1">{{ comment.text }}</p>
+      </li>
+    </ul>
+  </div>
 </div>

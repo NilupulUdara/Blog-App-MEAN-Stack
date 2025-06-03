@@ -6,11 +6,11 @@
     <div class="flex justify-between items-center">
       <a [routerLink]="['/posts', post._id]" class="text-blue-500 hover:underline">Read more</a>
 
-      <div class="flex justify-end">
-        <button (click)="delete(post._id)" class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition">
-          Delete
-        </button>
-      </div>
+      <button *ngIf="post.userId === currentUserId" (click)="delete(post._id)"
+        class="mt-2 px-4 py-1 bg-red-600 text-white rounded hover:bg-red-700">
+        Delete
+      </button>
+
     </div>
   </li>
 </ul>
